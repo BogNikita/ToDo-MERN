@@ -1,0 +1,6 @@
+{
+    "port": "5000",
+    "jwtSecret": "some secret",
+    "mongoUri": "mongodb+srv://nikita:1234qwer@cluster0.3wxth.mongodb.net/ToDoDataBase?retryWrites=true&w=majority",
+    "baseUrl": "http://localhost:5000"
+}
