@@ -21,7 +21,7 @@ const useInputValue = (defaultValue) => {
 function TodoCreater({onCreate, onChange, title = '', id, onToggle, description = ''}) {
 
     const input = useInputValue(title);
-    const textArea = useInputValue(description)
+    const textArea = useInputValue(description);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -36,7 +36,7 @@ function TodoCreater({onCreate, onChange, title = '', id, onToggle, description 
             
         }
     };
-    
+
     return (
         <form id="form" onSubmit={submitHandler}>
             <label htmlFor="task">Название задачи</label>
@@ -61,10 +61,8 @@ TodoCreater.propTypes = {
     onToggle: PropTypes.func,
     onChange: PropTypes.func,
     title: PropTypes.string,
-    id: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]) 
+    description: PropTypes.string,
+    id: PropTypes.string
 };
 
 

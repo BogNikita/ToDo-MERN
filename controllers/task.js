@@ -1,5 +1,4 @@
 const Task = require('../model/Task');
-const config = require('config');
 
 
 exports.getTasks = async (req,res) => {
@@ -13,8 +12,8 @@ exports.getTasks = async (req,res) => {
 
 exports.createTask = async (req, res) => {
     try {
-        const {title, description} = req.body;
-        const task = new Task({title, description, owner: req.user.userId})
+        const {title, description, id} = req.body;
+        const task = new Task({id, title, description, owner: req.user.userId})
         await task.save();
 
         res.status(201).json({status: 'Задача добавлена'})
@@ -26,7 +25,7 @@ exports.createTask = async (req, res) => {
 exports.changeTask = async (req, res) => {
     try {
         const {title, description, id} = req.body;
-        const task = await Task.findByIdAndUpdate(id, {title, description});
+        const task = await Task.findOneAndUpdate({id}, {title, description});
         await task.save();
 
         res.status(201).json({status: 'Сообщение изменено'});
@@ -38,7 +37,7 @@ exports.changeTask = async (req, res) => {
 exports.changeComplteTask = async (req, res) => {
     try {
         const {completed, id} = req.body;
-        const task = await Task.findByIdAndUpdate(id, {completed});
+        const task = await Task.findOneAndUpdate({id}, {completed});
         await task.save();
 
         res.status(201).json({status: 'Статус изменен'});
@@ -50,7 +49,7 @@ exports.changeComplteTask = async (req, res) => {
 exports.deleteTask = async (req, res) => {
     try {
         const {id} = req.body;
-        const task = await Task.findByIdAndDelete(id);
+        await Task.findOneAndDelete({id});
 
         res.status(201).json({status: 'Запись удалена'});
     } catch (e) {

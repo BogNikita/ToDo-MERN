@@ -32,7 +32,7 @@ function MainPage() {
 
   const toggleTodo = useCallback(async (id) => {
    try {
-    const find = todos.find(item => item._id === id);
+    const find = todos.find(item => item.id === id);
     const completed = !find.completed;
     const response = await request('/api/main/completed/', 'PATCH', {id, completed}, {
       Authorization: `Bearer ${auth.token}`
@@ -40,7 +40,7 @@ function MainPage() {
     let newTodos = [...todos];
     if (response.status) {
       newTodos = newTodos.map(item => {
-        if (item._id === id) {
+        if (item.id === id) {
           item.completed = completed;
         }
         return item
@@ -59,7 +59,7 @@ function MainPage() {
       });
       let newTodos = [...todos];
       if (response.status) {
-         newTodos = newTodos.filter(item => item._id !== id);
+         newTodos = newTodos.filter(item => item.id !== id);
       }
       setState(newTodos)
     } catch (e) {
@@ -75,7 +75,7 @@ function MainPage() {
       });
   
       if (response.status) {
-        const find = todos.find((item) => item._id === id);
+        const find = todos.find((item) => item.id === id);
         find.title = title;
         find.description = description;
       }
@@ -87,7 +87,7 @@ function MainPage() {
 
   const addTodo = useCallback(async (title, description) => {
     try {
-      const newTask = {completed: false, title, description};
+      const newTask = {completed: false, title, description, id: Date.now().toLocaleString()};
 
       const response = await request('/api/main/', 'POST', {...newTask}, {
       Authorization: `Bearer ${auth.token}`

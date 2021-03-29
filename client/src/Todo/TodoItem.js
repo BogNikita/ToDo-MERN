@@ -14,7 +14,7 @@ function TodoItem({todo, index, onChange}) {
     const onToggle = (value) => {
         setChangeItem(value)
     };
-
+    
     return(
         <li style={todo.completed ? {textDecoration: 'line-through'} : null}>
             <div className="site-card-border-less-wrapper">
@@ -23,15 +23,15 @@ function TodoItem({todo, index, onChange}) {
                     {!changeItem 
                     ? (<>
                         <div>
-                            <Checkbox onChange={() => onChange(todo._id)} checked={todo.completed}/>
+                            <Checkbox onChange={() => onChange(todo.id)} checked={todo.completed}/>
                             <strong> {index + 1}</strong>&nbsp; 
                             {todo.description || ''}
                         </div>
                         <div>
-                            <DeleteOutlined onClick={() => removeTodo(todo._id)}/>
+                            <DeleteOutlined onClick={() => removeTodo(todo.id)}/>
                         </div>
                     </>)
-                    : <TodoCreater title={todo.title} id={todo._id} description={todo.description} onChange={changeTodo} onToggle={onToggle}/>}
+                    : <TodoCreater title={todo.title} id={todo.id} description={todo.description} onChange={changeTodo} onToggle={onToggle}/>}
                         
                 </Card>
             </div>
