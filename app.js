@@ -7,11 +7,12 @@ const cookieParser = require('cookie-parser');
 
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'client/build')))
 app.use(express.json({extended: true}));
 app.use(cookieParser());
 app.use(router);
 
-const PORT = config.get('port') || 5000;
+const PORT = process.env.PORT || 5000;
 
 async function start() {
     try {
@@ -21,7 +22,7 @@ async function start() {
             useCreateIndex: true,
             useFindAndModify: false 
         })
-        app.listen(5000, () => console.log(`Server has benn started on port ${PORT}...`));
+        app.listen(PORT, () => console.log(`Server has benn started on port ${PORT}...`));
     } catch (e) {
         console.log('Server Error', e.message);
         process.exit(1)
