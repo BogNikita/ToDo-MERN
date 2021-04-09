@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 
 
 const app = express();
-app.use(express.static(path.join(__dirname, 'client/public')))
+app.use(express.static(path.join(__dirname, 'client/build')))
 app.use(express.json({extended: true}));
 app.use(cookieParser());
 app.use(router);
