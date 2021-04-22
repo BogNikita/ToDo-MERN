@@ -1,6 +1,6 @@
 import { Layout } from 'antd';
 import { useRoutes } from "./route";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import { useAuth } from './hooks/auth.hook';
 import { AuthContext } from './context/AuthContext';
 
@@ -20,7 +20,7 @@ function App() {
         <Header>
           <div className="logo">
             <h1>ToDo React</h1>
-            {isAuthenticated ? <a href="true" onClick={logout}>Выйти</a> : null}
+            {isAuthenticated ? <Link to='/' onClick={logout}>Выйти</Link> : null}
           </div>
         </Header>
         <Content style={{ padding: '0 50px' }}>
