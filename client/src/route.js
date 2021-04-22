@@ -6,7 +6,7 @@ export const useRoutes = isAuthenticated => {
     if (isAuthenticated) {
         return (
             <Switch>
-                <Route path="/main">
+                <Route exact path="/main">
                     <MainPage/>
                 </Route>
                 <Redirect to="/main"/>

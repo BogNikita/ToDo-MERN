@@ -28,7 +28,7 @@ function MainPage() {
   useEffect( () =>{
     fetchTodo();
   }, [fetchTodo])
-  console.log(auth);
+
   const [todos, setState] = useState([]);
 
   const toggleTodo = useCallback(async (id) => {
