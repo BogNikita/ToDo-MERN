@@ -6,6 +6,7 @@ import TodoList from "../Todo/TodoList";
 import { Empty, message, Space } from 'antd';
 import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from '../context/AuthContext';
+import { Redirect } from "react-router-dom";
 
 
 function MainPage() {
@@ -27,7 +28,7 @@ function MainPage() {
   useEffect( () =>{
     fetchTodo();
   }, [fetchTodo])
-
+  console.log(auth);
   const [todos, setState] = useState([]);
 
   const toggleTodo = useCallback(async (id) => {
@@ -101,6 +102,10 @@ function MainPage() {
       message.error(error);
     }
   }, [todos, auth.token, request, error])
+
+  if (!auth.isAuthenticated) {
+    return <Redirect to='/auth'/>
+  }
 
   return (
     <Context.Provider value={{removeTodo, changeTodo}}>
